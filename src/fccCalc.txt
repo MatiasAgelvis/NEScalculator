@@ -1,0 +1,26 @@
+const calculate = () => {
+
+        let revop = operation.split("").reverse();
+        let cleanOperation = "";
+        let prev = "";
+        for (var i = 0; i < revop.length; i++) {
+            console.log(prev)
+            let curr = revop[i];
+            if (numbers.some((x) => curr == x) || curr == ".") {
+                console.log(1,curr)
+                cleanOperation += curr;
+                prev = curr;
+            }
+            if (operators.some((x) => curr == x)) {
+                if (prev == "-"){console.log(2, prev,curr);cleanOperation += curr; prev = curr;}
+                if (numbers.some((x) => prev == x)){console.log(3,curr);cleanOperation += curr; prev = curr;}
+            }
+        }
+        let fccOp = cleanOperation.split("").reverse().join("");
+        
+        console.log(operation, fccOp);
+        let x = calc.calculate(fccOp).toString();
+        setAns(x);
+        setOperation(x);
+        setInput(x);
+    };

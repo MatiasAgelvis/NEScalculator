@@ -1,0 +1,115 @@
+@charset "utf-8";
+@import "../node_modules/bulma/bulma.sass";
+@import "../node_modules/nes.css/css/nes.css";
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+body {
+/*  margin: 0;*/
+  font-family: 'Press Start 2P', monospace;
+/*  -webkit-font-smoothing: antialiased;*/
+/*  -moz-osx-font-smoothing: grayscale;*/
+}
+
+.right-aling {text-align: right;}
+
+.btn-container {  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "AC back percent div"
+    "_7 _8 _9 mult"
+    "_4 _5 _6 minus"
+    "_1 _2 _3 plus"
+    "_0 _0 point equal";
+}
+
+._7 { grid-area: _7; }
+
+._8 { grid-area: _8; }
+
+._9 { grid-area: _9; }
+
+._4 { grid-area: _4; }
+
+._5 { grid-area: _5; }
+
+._6 { grid-area: _6; }
+
+._1 { grid-area: _1; }
+
+._2 { grid-area: _2; }
+
+._3 { grid-area: _3; }
+
+._0 { grid-area: _0; }
+
+.point { grid-area: point; }
+
+.equal { grid-area: equal; }
+
+.plus { grid-area: plus; }
+
+.minus { grid-area: minus; }
+
+.mult { grid-area: mult; }
+
+.div { grid-area: div; }
+
+.percent { grid-area: percent; }
+
+.AC { grid-area: AC; }
+
+.back { grid-area: back; }
+
+
+.head-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  align-content: stretch;
+  margin: 1.5rem;
+}
+
+.calculator-container{
+ margin: 1.5rem; 
+}
+
+.text-container{
+  overflow: hidden;
+}
+
+.calculator-body{
+  min-width: min-content;
+}
+
+.text {
+  &:empty:before {content: '\a0';}
+
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+  // overflow: visible;
+
+}
+
+.animate {
+  position: relative;
+  animation: leftright 3s infinite alternate ease-in-out;
+}
+
+@keyframes leftright {
+  0%,
+  20% {
+    transform: translateX(0%);
+    left: 0%;
+  }
+  80%,
+  100% {
+    transform: translateX(-100%);
+    left: 100%;
+  }
+}
