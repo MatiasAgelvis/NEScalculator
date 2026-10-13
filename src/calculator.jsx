@@ -112,16 +112,20 @@ export default function Calculator() {
     useEffect(() => {
         const onKeyDown = (e) => {
             if (e.metaKey || e.ctrlKey || e.altKey) return;
-            // let Enter/Space activate a focused button instead of the shortcut
-            if (e.target instanceof HTMLElement && e.target.closest("button")) return;
-            if (/^[0-9]$/.test(e.key)) pressDigit(e.key);
+            // Enter/Space natively activate a focused button; every other key
+            // is a global shortcut even while a button holds focus
+            const onButton =
+                e.target instanceof HTMLElement && e.target.closest("button");
+            if (e.key === "Enter" && onButton) return;
+            if (e.key === " ") return;
+            if (e.key === "Enter" || e.key === "=") {
+                e.preventDefault();
+                calculate();
+            } else if (/^[0-9]$/.test(e.key)) pressDigit(e.key);
             else if (e.key === ".") pressDecimal();
             else if (OPERATORS.includes(e.key)) pressOperator(e.key);
             else if (e.key === "(" || e.key === ")") pressParen(e.key);
-            else if (e.key === "Enter" || e.key === "=") {
-                e.preventDefault();
-                calculate();
-            } else if (e.key === "Backspace") backspace();
+            else if (e.key === "Backspace") backspace();
             else if (e.key === "Escape") clearAll();
         };
         window.addEventListener("keydown", onKeyDown);
@@ -139,6 +143,7 @@ export default function Calculator() {
                     pressDigit={pressDigit}
                     pressDecimal={pressDecimal}
                     pressOperator={pressOperator}
+                    pressParen={pressParen}
                     pressAns={pressAns}
                     backspace={backspace}
                     clearAll={clearAll}
