@@ -1,7 +1,7 @@
 import Key from "./key";
 
 
-export default function Keyborad({
+export default function Keyboard({
 	operation,
 	setOperation,
 	input,
@@ -15,7 +15,7 @@ export default function Keyborad({
 	const numbers = ["7", "8", "9", "4", "5", "6", "1", "2", "3", "0"];
 
 	const inputKey = (x) => () => {
-		if (input != "0") {
+		if (input !== "0") {
 			// if it's an operator clear the input screen
 			setInput(operators.some((x) => input.includes(x)) ? x : input + x);
 			setOperation(operation + x);
@@ -46,7 +46,6 @@ export default function Keyborad({
 	}
 
 	const backspaceInput = () => {
-		console.log(input.length);
 		if (input.length > 0) {
 			setOperation(backspace(operation));
 			setInput(backspace(input));

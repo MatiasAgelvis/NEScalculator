@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "preact/hooks";
 import Keyboard from "./components/keyboard";
 import Display from "./components/display";
 import calc from "ez-calculator";

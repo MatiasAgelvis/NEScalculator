@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import { useRef, useEffect } from "preact/hooks";
 
 export default function Display({ content }) {
     const displayRef = useRef(null);
@@ -8,8 +8,6 @@ export default function Display({ content }) {
         let display = displayRef.current;
         let text = textRef.current;
 
-        // console.log(display.clientWidth, text.clientWidth);
-
         if (0.85 * display.clientWidth < text.clientWidth) {
             text.classList.add("animate");
         } else {
@@ -18,11 +16,7 @@ export default function Display({ content }) {
     }, [content]);
 
     return (
-        <div
-            id="display"
-            className="nes-container text-container right-aling"
-            ref={displayRef}
-        >
+        <div className="nes-container text-container right-align" ref={displayRef}>
             <span className="text" ref={textRef}>
                 {content}
             </span>
