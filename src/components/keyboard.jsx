@@ -1,83 +1,30 @@
 import Key from "./key";
 
-
 export default function Keyboard({
-	operation,
-	setOperation,
-	input,
-	setInput,
-	ans,
-	setAns,
+	pressDigit,
+	pressDecimal,
+	pressOperator,
+	pressAns,
+	backspace,
+	clearAll,
 	calculate
 }) {
-	const operators = ["+", "-", "*", "/"];
 	// Order is important, do not change
 	const numbers = ["7", "8", "9", "4", "5", "6", "1", "2", "3", "0"];
 
-	const inputKey = (x) => () => {
-		if (input !== "0") {
-			// if it's an operator clear the input screen
-			setInput(operators.some((x) => input.includes(x)) ? x : input + x);
-			setOperation(operation + x);
-		} else {
-			// remove the leading zero
-			setOperation(backspace(operation) + x);
-			setInput(backspace(input) + x);
-		}
-	};
-
-	const inputDecimal = () => {
-		if (input.includes(".")) {
-			let saveInput = input;
-			setInput("Input Already Contains Decimal Point");
-			setTimeout(() => setInput(saveInput), 1000);
-		} else {
-			inputKey(".")();
-		}
-	};
-
-	const inputOperator = (x) => () => {
-		setInput(x);
-		setOperation(operation + x);
-	};
-
-	function backspace(strng) {
-		return strng.substring(0, strng.length - 1);
-	}
-
-	const backspaceInput = () => {
-		if (input.length > 0) {
-			setOperation(backspace(operation));
-			setInput(backspace(input));
-		}
-	};
-
-	const clearAll = () => {
-		setOperation("0");
-		setInput("0");
-	};
-
-	const inputAns = () => {
-		if (operation !== '0'){
-			setOperation(operation + ans);
-		}
-		else {setOperation(ans);}
-		setInput(ans);
-	};
-
 	return (
 		<div className="btn-container nes-container">
-		{numbers.map(num => <Key
-				id={'_' + num}
-				key={'_' + num}
-				classNames={'_' + num}
-				clickHandle={inputKey(num)}
-				content={num}
-			/>)}
+			{numbers.map(num => <Key
+					id={'_' + num}
+					key={'_' + num}
+					classNames={'_' + num}
+					clickHandle={() => pressDigit(num)}
+					content={num}
+				/>)}
 			<Key
 				id="decimal"
 				classNames="point is-warning"
-				clickHandle={inputDecimal}
+				clickHandle={pressDecimal}
 				content="."
 			/>
 			<Key
@@ -89,31 +36,31 @@ export default function Keyboard({
 			<Key
 				id="add"
 				classNames="plus is-primary"
-				clickHandle={inputOperator("+")}
+				clickHandle={() => pressOperator("+")}
 				content="+"
 			/>
 			<Key
 				id="subtract"
 				classNames="minus is-primary"
-				clickHandle={inputOperator("-")}
+				clickHandle={() => pressOperator("-")}
 				content="-"
 			/>
 			<Key
 				id="multiply"
 				classNames="mult is-primary"
-				clickHandle={inputOperator("*")}
+				clickHandle={() => pressOperator("*")}
 				content="x"
 			/>
 			<Key
 				id="divide"
 				classNames="div is-primary"
-				clickHandle={inputOperator("/")}
+				clickHandle={() => pressOperator("/")}
 				content="/"
 			/>
 			<Key
 				id="ans"
 				classNames="ans is-success"
-				clickHandle={inputAns}
+				clickHandle={pressAns}
 				content="ANS"
 			/>
 			<Key
@@ -125,7 +72,7 @@ export default function Keyboard({
 			<Key
 				id="backspace"
 				classNames="back is-warning"
-				clickHandle={backspaceInput}
+				clickHandle={backspace}
 				content="&lt;#"
 			/>
 		</div>
