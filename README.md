@@ -11,15 +11,18 @@ A retro-styled calculator with the look and feel of the Nintendo Entertainment S
 
 ## Development
 
+This project pins its Node version with [mise](https://mise.jdx.dev) (see [`mise.toml`](mise.toml)).
+
 ```sh
-pnpm install
-pnpm dev
+mise install
+npm install
+npm run dev
 ```
 
 ## Build
 
 ```sh
-pnpm build
+npm run build
 ```
 
 The production build lands in `dist/` and uses relative asset paths, so it works from any path (including GitHub Pages project sites).
