@@ -1,23 +1,24 @@
 {
-  "name": "calculator",
+  "name": "nes-calculator",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
-    "bulma": "^0.9.3",
     "ez-calculator": "^1.1.1",
     "nes.css": "^2.3.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "recoil": "^0.7.0"
+    "preact": "^11.0.1"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^1.0.7",
-    "sass": "^1.49.11",
-    "vite": "^2.9.1"
+    "@preact/preset-vite": "^2.10.6",
+    "sass": "^1.105.1",
+    "vite": "^8.3.4"
+  },
+  "engines": {
+    "node": ">=20.19.0"
   }
 }
