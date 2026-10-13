@@ -28,15 +28,16 @@ body {
 .btn-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
   gap: 0px 0px;
   grid-auto-flow: row;
   grid-template-areas:
-    "AC back percent div"
-    "_7 _8 _9 mult"
-    "_4 _5 _6 minus"
-    "_1 _2 _3 plus"
-    "_0 _0 point equal";
+    "AC back open close"
+    "_7 _8 _9 div"
+    "_4 _5 _6 mult"
+    "_1 _2 _3 minus"
+    "_0 _0 point plus"
+    "ans ans equal equal";
 }
 
 ._7 {
@@ -103,8 +104,16 @@ body {
   grid-area: div;
 }
 
-.percent {
-  grid-area: percent;
+.open {
+  grid-area: open;
+}
+
+.close {
+  grid-area: close;
+}
+
+.ans {
+  grid-area: ans;
 }
 
 .AC {

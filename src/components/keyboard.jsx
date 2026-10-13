@@ -4,6 +4,7 @@ export default function Keyboard({
 	pressDigit,
 	pressDecimal,
 	pressOperator,
+	pressParen,
 	pressAns,
 	backspace,
 	clearAll,
@@ -26,6 +27,18 @@ export default function Keyboard({
 				classNames="point is-warning"
 				clickHandle={pressDecimal}
 				content="."
+			/>
+			<Key
+				id="open-paren"
+				classNames="open is-primary"
+				clickHandle={() => pressParen("(")}
+				content="("
+			/>
+			<Key
+				id="close-paren"
+				classNames="close is-primary"
+				clickHandle={() => pressParen(")")}
+				content=")"
 			/>
 			<Key
 				id="equals"
