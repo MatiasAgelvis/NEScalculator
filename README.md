@@ -7,6 +7,8 @@ A retro-styled calculator with the look and feel of the Nintendo Entertainment S
 - Classic NES pixel-art UI
 - Basic arithmetic: `+`, `-`, `x`, `/`
 - `ANS` key to reuse the last result
+- Physical keyboard support: digits, `.`, `+` `-` `x` `/`, `Enter`/`=` to calculate, `Backspace`, `Esc` to clear
+- Invalid expressions show `ERROR` instead of crashing
 - Long expressions scroll automatically in the display
 
 ## Development
