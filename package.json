@@ -9,7 +9,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "ez-calculator": "^1.1.1",
     "nes.css": "^2.3.0",
     "preact": "^11.0.1"
   },
