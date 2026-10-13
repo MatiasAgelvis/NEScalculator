@@ -1,16 +1,27 @@
 @charset "utf-8";
-@import "../node_modules/bulma/bulma.sass";
-@import "../node_modules/nes.css/css/nes.css";
-@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
+/* NES.css is imported in main.jsx; the Press Start 2P webfont is preloaded in index.html */
 
 body {
-  /*  margin: 0;*/
   font-family: "Press Start 2P", monospace;
-  /*  -webkit-font-smoothing: antialiased;*/
-  /*  -moz-osx-font-smoothing: grayscale;*/
 }
 
-.right-aling {
+.title {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.125;
+}
+
+.subtitle {
+  margin: 0.5rem 0 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: #4a4a4a;
+}
+
+.right-align {
   text-align: right;
 }
 
