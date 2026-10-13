@@ -27,6 +27,9 @@ body {
 
 .btn-container {
   display: grid;
+  // keep the buttons' size out of the display's hands: the keypad keeps its
+  // intrinsic width even when a long number would want to stretch it
+  min-width: min-content;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
   gap: 0px 0px;
@@ -144,10 +147,6 @@ body {
   overflow: hidden;
 }
 
-.calculator-body {
-  min-width: min-content;
-}
-
 .text {
   &:empty:before {
     content: "\a0";
@@ -170,15 +169,14 @@ body {
   }
 }
 
+/* --scroll is set by the Display component to the exact overflow distance */
 @keyframes leftright {
   0%,
   20% {
-    transform: translateX(0%);
-    left: 0%;
+    transform: translateX(0);
   }
   80%,
   100% {
-    transform: translateX(-100%);
-    left: 100%;
+    transform: translateX(var(--scroll, 0));
   }
 }
