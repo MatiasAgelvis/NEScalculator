@@ -2,7 +2,7 @@
 // Replaces ez-calculator, whose eval() approach tripped minifier
 // warnings and gave no control over errors.
 
-const TOKEN_RE = /\d+\.\d*|\.\d+|\d+|[+\-*/]/g;
+const TOKEN_RE = /\d+\.\d*|\.\d+|\d+|[+\-*/()]/g;
 
 function tokenize(expression) {
     const tokens = expression.match(TOKEN_RE) ?? [];
@@ -18,15 +18,25 @@ export function evaluate(expression) {
     let pos = 0;
     const peek = () => tokens[pos];
 
-    // number, possibly signed: "-3", "+.5", ...
+    // number or parenthesized subexpression, possibly signed:
+    // "-3", "+.5", "-(2+1)", ...
     const parsePrimary = () => {
         let sign = 1;
         if (peek() === "-" || peek() === "+") {
             if (peek() === "-") sign = -1;
             pos += 1;
         }
+        if (peek() === "(") {
+            pos += 1;
+            const value = parseExpression();
+            if (peek() !== ")") {
+                throw new SyntaxError('Missing ")"');
+            }
+            pos += 1;
+            return sign * value;
+        }
         const token = peek();
-        if (token === undefined || /[+\-*/]/.test(token)) {
+        if (token === undefined || /[+\-*/()]/.test(token)) {
             throw new SyntaxError(`Unexpected "${token ?? "end of expression"}"`);
         }
         pos += 1;
