@@ -9,20 +9,24 @@ import { JSDOM } from "jsdom";
 
 const dom = new JSDOM(
     '<!doctype html><html><body><div id="root"></div></body></html>',
-    { url: "http://localhost/" }
+    // pretendToBeVisual gives jsdom requestAnimationFrame, which Preact
+    // uses to flush effects — without it, effect cleanup is delayed ~100ms
+    { url: "http://localhost/", pretendToBeVisual: true }
 );
 globalThis.window = dom.window;
 globalThis.document = dom.window.document;
 globalThis.HTMLElement = dom.window.HTMLElement;
 globalThis.KeyboardEvent = dom.window.KeyboardEvent;
 globalThis.MutationObserver = dom.window.MutationObserver;
+globalThis.getComputedStyle = dom.window.getComputedStyle;
 
 const assets = new URL("../dist/assets/", import.meta.url);
 const bundle = readdirSync(assets).find((f) => /^index-.*\.js$/.test(f));
 assert.ok(bundle, "no built bundle found in dist/assets — run `npm run build` first");
 await import(new URL(bundle, assets).href);
 
-const tick = () => new Promise((resolve) => setTimeout(resolve, 0));
+// generous enough for Preact's double-rAF effect flush to settle
+const tick = () => new Promise((resolve) => setTimeout(resolve, 80));
 
 // top display shows the full operation, bottom display the current operand
 const display = () => document.querySelectorAll(".display-container .text")[0].textContent;
@@ -48,7 +52,7 @@ test("paren buttons build an expression and calculate", async () => {
     await click("add");
     await click("_4");
     await click("close-paren");
-    assert.equal(display(), "2*(3+4"); // implicit * after the digit
+    assert.equal(display(), "2*(3+4)"); // implicit * after the digit
     assert.equal(input(), ""); // nothing being typed after ")"
     await click("equals");
     assert.equal(display(), "14");
