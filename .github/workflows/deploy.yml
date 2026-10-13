@@ -18,10 +18,10 @@ jobs:
       - name: Setup mise 🧰
         uses: jdx/mise-action@v2
 
-      - name: Install and Build 🏗️
+      - name: Install and Test 🧪
         run: |
           npm ci
-          npm run build
+          npm test
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
