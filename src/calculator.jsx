@@ -1,7 +1,7 @@
 import { useState, useEffect } from "preact/hooks";
 import Keyboard from "./components/keyboard";
 import Display from "./components/display";
-import calc from "ez-calculator";
+import { evaluate } from "./math";
 
 // ----------------------------------
 
@@ -76,11 +76,7 @@ export default function Calculator() {
         if (operation === "" || isError || OPERATORS.includes(operation.slice(-1)))
             return;
         try {
-            const x = calc.calculate(operation).toString();
-            if (!Number.isFinite(Number(x))) {
-                setOperation("ERROR");
-                return;
-            }
+            const x = evaluate(operation).toString();
             setAns(x);
             setOperation(x);
         } catch {
