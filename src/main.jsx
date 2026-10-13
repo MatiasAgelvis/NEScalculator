@@ -13,7 +13,7 @@ render(
                 <h2 className="subtitle">Hours of FUN!!</h2>
             </div>
             <a
-                href="https://github.com/MatiasAgelvis"
+                href="https://github.com/MatiasAgelvis/NEScalculator"
                 target="_blank"
                 rel="noreferrer"
                 aria-label="GitHub profile"
