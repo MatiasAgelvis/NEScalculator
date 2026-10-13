@@ -5,10 +5,18 @@ export default function Display({ content }) {
     const textRef = useRef(null);
 
     useEffect(() => {
-        let display = displayRef.current;
-        let text = textRef.current;
-
-        if (0.85 * display.clientWidth < text.clientWidth) {
+        const display = displayRef.current;
+        const text = textRef.current;
+        const style = getComputedStyle(display);
+        const innerWidth =
+            display.clientWidth -
+            parseFloat(style.paddingLeft) -
+            parseFloat(style.paddingRight);
+        // exact distance the text must travel so its end is visible,
+        // plus a little breathing room
+        const overflow = text.scrollWidth - innerWidth + 8;
+        if (overflow > 0) {
+            text.style.setProperty("--scroll", `${-overflow}px`);
             text.classList.add("animate");
         } else {
             text.classList.remove("animate");
